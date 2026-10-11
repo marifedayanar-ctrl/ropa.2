@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mujer | T SHOP</title>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  body {
+    background: #fff;
+    color: #000;
+    padding: 20px;
+  }
+
+  .main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+  }
+
+  /* Barra superior */
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    font-size: 12px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .menu-icon {
+    font-size: 18px;
+    cursor: pointer;
+  }
+
+  .top-bar-right {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  /* Ícono YouTube en barra superior (SVG) */
+  .yt-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .yt-icon:hover {
+    transform: scale(1.15);
+    opacity: 0.85;
+  }
+
+  .yt-icon svg {
+    width: 28px;
+    height: 20px;
+  }
+
+  /* Header con Logo grande centrado */
+  header {
+    text-align: center;
+    padding: 30px 20px 20px;
+  }
+
+  .logo {
+    font-size: 56px;
+    font-weight: 900;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
+    font-family: 'Arial Black', 'Helvetica Neue', sans-serif;
+    text-decoration: none;
+    color: #000;
+    display: block;
+  }
+
+  /* Banner Amarillo Verdoso */
+  .slogan-banner {
+    background: #D4FF00;
+    color: #000;
+    display: inline-block;
+    padding: 10px 40px;
+    font-size: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* Navegación principal */
+  .main-nav {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .main-nav a {
+    text-decoration: none;
+    color: #000;
+    font-size: 13px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+
+  .main-nav a:hover {
+    border-bottom-color: #D4FF00;
+  }
+
+  .main-nav a.active {
+    border-bottom-color: #000;
+    font-weight: 700;
+  }
+
+  /* Collage de imágenes */
+  .hero-collage {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    padding: 20px;
+  }
+
+  .hero-image {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: #f0f0f0;
+    overflow: hidden;
+  }
+
+  .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+
+  .hero-image:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Título de sección */
+  .section-title {
+    text-align: center;
+    padding: 50px 20px 30px;
+  }
+
+  .section-title h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .section-title p {
+    color: #888;
+    font-size: 14px;
+    margin-top: 10px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Grid de productos */
+  .products {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 40px 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 30px;
+  }
+
+  .product-card {
+    text-decoration: none;
+    color: #000;
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+
+  .product-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .product-image {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: #f4f4f4;
+    overflow: hidden;
+    margin-bottom: 15px;
+    position: relative;
+  }
+
+  .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+
+  .product-card:hover .product-image img {
+    transform: scale(1.05);
+  }
+
+  .product-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #D4FF00;
+    color: #000;
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .product-name {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    font-weight: 500;
+  }
+
+  .product-price {
+    font-size: 14px;
+    color: #666;
+  }
+
+  .product-price .old {
+    text-decoration: line-through;
+    color: #aaa;
+    margin-right: 8px;
+  }
+
+  /* Estado vacío */
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px 100px;
+    grid-column: 1 / -1;
+  }
+
+  .empty-state p {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  .btn-black {
+    display: inline-block;
+    background: #000;
+    color: #D4FF00;
+    padding: 14px 40px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+
+  .btn-black:hover {
+    opacity: 0.8;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid #eee;
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #888;
+  }
+
+  footer .footer-nav {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 15px;
+  }
+
+  footer .footer-nav a {
+    color: #000;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+  }
+
+  footer .footer-nav a:hover {
+    color: #D4FF00;
+  }
+
+  footer strong {
+    color: #000;
+  }
+
+  /* Redes sociales en el footer */
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+
+  .social-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .social-links a:hover {
+    transform: translateY(-3px);
+    opacity: 0.85;
+  }
+
+  .social-links a.youtube svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    body { padding: 10px; }
+    .logo { font-size: 36px; }
+    .main-nav { gap: 20px; }
+    .main-nav a { font-size: 11px; letter-spacing: 1px; }
+    .hero-collage { grid-template-columns: 1fr; }
+    .hero-image { aspect-ratio: 4/3; }
+    .products {
+      padding: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 15px;
+    }
+    .section-title h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="main-container">
+
+    <!-- Barra superior -->
+    <div class="top-bar">
+      <span class="menu-icon">☰</span>
+      <div class="top-bar-right">
+
+        <!-- Ícono oficial de YouTube (SVG) -->
+        <a href="https://www.youtube.com/@RESTAURANTE-5" target="_blank" class="yt-icon" title="YouTube">
+          <svg viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#FF0000" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305z"/>
+            <path fill="#FFFFFF" d="M232 336V176l142 80-142 80z"/>
+          </svg>
+        </a>
+
+        <span>🛒 0</span>
+      </div>
+    </div>
+
+    <!-- Header con Logo grande -->
+    <header>
+      <a href="index.html" class="logo">T SHOP</a>
+      <div class="slogan-banner">Playeras para todos</div>
+    </header>
+
+    <!-- Navegación principal -->
+    <nav class="main-nav">
+      <a href="nuevo.html">Nuevo</a>
+      <a href="mujer.html" class="active">Mujer</a>
+      <a href="hombre.html">Hombre</a>
+      <a href="mas.html">Más</a>
+    </nav>
+
+    <!-- Collage de imágenes -->
+    <div class="hero-collage">
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=500&fit=crop" alt="Mujer con playera">
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&h=500&fit=crop" alt="Playera">
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=400&h=500&fit=crop" alt="Mujer con playera">
+      </div>
+    </div>
+
+    <!-- Título de sección -->
+    <div class="section-title">
+      <h1>Playeras Mujer</h1>
+      <p>Colección exclusiva para mujer</p>
+    </div>
+
+    <!-- Grid de productos -->
+    <div class="products">
+
+      <!-- 
+        ⬇️ ESTADO VACÍO
+        Descomenta este bloque si NO quieres mostrar productos
+      -->
+      <!--
+      <div class="empty-state">
+        <p>No tenemos productos<br>para mostrar en este momento.</p>
+        <a href="#" class="btn-black">Compra lo nuevo</a>
+      </div>
+      -->
+
+      <!-- ⬇️ PRODUCTOS DE EJEMPLO -->
+
+      <a href="#" class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=400&h=500&fit=crop" alt="Playera Blanca">
+          <span class="product-badge">Nuevo</span>
+        </div>
+        <div class="product-name">Playera Blanca Leopardo</div>
+        <div class="product-price">$299.00</div>
+      </a>
+
+      <a href="#" class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1554568218-0f1715e72254?w=400&h=500&fit=crop" alt="Playera Rosa">
+        </div>
+        <div class="product-name">Playera Smiley Rosa</div>
+        <div class="product-price">
+          <span class="old">$399.00</span> $299.00
+        </div>
+      </a>
+
+      <a href="#" class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=400&h=500&fit=crop" alt="Playera Beige">
+        </div>
+        <div class="product-name">Playera Oversize Beige</div>
+        <div class="product-price">$349.00</div>
+      </a>
+
+      <a href="#" class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1485231183945-fffde7cc051e?w=400&h=500&fit=crop" alt="Playera Negra">
+          <span class="product-badge">-25%</span>
+        </div>
+        <div class="product-name">Playera Negra Crop</div>
+        <div class="product-price">
+          <span class="old">$399.00</span> $299.00
+        </div>
+      </a>
+
+      <a href="#" class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1564859228273-274232fdb516?w=400&h=500&fit=crop" alt="Playera Floral">
+        </div>
+        <div class="product-name">Playera Estampada Floral</div>
+        <div class="product-price">$379.00</div>
+      </a>
+
+      <a href="#" class="product-card">
+        <div class="product-image">
+          <img src="https://images.unsplash.com/photo-1571945153237-4929e783af4a?w=400&h=500&fit=crop" alt="Playera Gris">
+        </div>
+        <div class="product-name">Playera Básica Gris</div>
+        <div class="product-price">$279.00</div>
+      </a>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+
+      <!-- Redes sociales con ícono oficial de YouTube -->
+      <div class="social-links">
+        <a href="https://www.youtube.com/@RESTAURANTE-5" target="_blank" class="youtube" title="YouTube">
+          <svg viewBox="0 0 576 512" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#FF0000" d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305z"/>
+            <path fill="#FFFFFF" d="M232 336V176l142 80-142 80z"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- Navegación del footer -->
+      <div class="footer-nav">
+        <a href="nuevo.html">Nuevo</a>
+        <a href="mujer.html">Mujer</a>
+        <a href="hombre.html">Hombre</a>
+        <a href="mas.html">Más</a>
+      </div>
+
+      © 2025 <strong>T SHOP</strong> — Todos los derechos reservados
+    </footer>
+
+  </div>
+
+</body>
+</html>
